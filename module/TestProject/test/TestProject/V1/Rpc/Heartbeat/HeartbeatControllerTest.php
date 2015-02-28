@@ -20,14 +20,27 @@ class HeartbeatControllerTest extends AbstractHttpControllerTestCase
 
     }
 
-    public function testHeartbeatAction()
+    public function testHeartbeatActionInvalidContentType()
     {
         $request = $this->getRequest();
+        $request->setMethod('GET');
+
+        $this->dispatch('/heartbeat');
+
+        $this->assertModuleName('TestProject');
+        $this->assertControllerClass('HeartbeatController');
+
+        $this->assertResponseStatusCode(406);
+    }
+
+    public function testHeartbeatActionOk()
+    {
+        $request = $this->getRequest();
+        $request->setMethod('GET');
 
         $headers = $this->getRequest()->getHeaders();
         $headers->addHeaderLine('Accept', 'application/json');
 
-        $request->setMethod('GET');
         $this->dispatch('/heartbeat');
 
         $this->assertModuleName('TestProject');
@@ -40,5 +53,4 @@ class HeartbeatControllerTest extends AbstractHttpControllerTestCase
 
         $this->assertEquals(array('status'=>'ok'), $data);
     }
-
 }
