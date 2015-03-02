@@ -51,4 +51,19 @@ return array(
             ),
         ),
     ),
+    'zf-mvc-auth' => array(
+        'authorization' => array(
+            'TestProject\\V1\\Rpc\\Heartbeat\\Controller' => array(
+                'actions' => array(
+                    'heartbeat' => array(
+                        'GET' => true,
+                        'POST' => false,
+                        'PATCH' => false,
+                        'PUT' => false,
+                        'DELETE' => false,
+                    ),
+                ),
+            ),
+        ),
+    ),
 );
